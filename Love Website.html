@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Page</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            background: url('aneeza.jpg') no-repeat center center;
+            background-size: 100% 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-shadow: 2px 2px 3px black;
+            overflow: hidden;
+        }
+        .hearts span, .flowers span {
+      position: absolute;
+      font-size: 22px;
+      opacity: 0.7;
+      animation-timing-function: ease-in-out;
+    }
+    .hearts span { animation: floatSlow 12s infinite; }
+    .flowers span { animation: dropSlow 8s infinite; }
+        button {
+            margin: 10px;
+            padding: 12px 24px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            transition: background 0.3s;}
+        button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 24px;
+            text-align: center;
+            padding: 0 15px;
+        }
+        .flower {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-image: url('https://pngimg.com/uploads/flower/flower_PNG5475.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: fall linear;
+            top: -50px;
+            pointer-events: none;
+            z-index: 999;
+        }
+        @keyframes dropSlow {
+      0% { transform: translateY(-10%); opacity: 0.8; }
+      100% { transform: translateY(110vh); opacity: 0; }
+    }
+
+    .hearts span { animation: floatSlow 12s infinite; }
+    .flowers span { animation: dropSlow 8s infinite; }
+        @media (max-width: 600px) {
+            button {
+                width: 80%;
+                font-size: 16px;
+            }
+            #message {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+ <div class="overlay"></div>
+  <div class="hearts" id="hearts"></div>
+  <div class="flowers" id="flowers"></div>
+
+  <h1><span>💗</span> Meri Pyari <strong>Aneeza</strong> <span>💗</span></h1>
+
+  <button class="button" onclick="showMessage('sorry')">I'm Sorry 😢</button>
+  <button class="button" onclick="showMessage('love')">I Love You 💖</button>
+  <button class="button" onclick="dropFlowers()">Surprise for You 🌸</button>
+
+  <div id="sorryMessage" class="message">
+    Aneeza... meri har khushi tumse judi hai. Agar kabhi takleef hui ho to sach mein dil se sorry. Tum meri zindagi ho. 💔
+  </div>
+
+  <div id="loveMessage" class="message">
+    Main har din tumse aur zyada mohabbat karta hoon. Tum meri dua, meri smile, meri duniya ho. I love you endlessly ❤️✨
+  </div>
+
+  <audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0f8a5d3375.mp3?filename=soft-piano-9921.mp3" type="audio/mpeg">
+  </audio>
+  <div id="playAudio" onclick="playMusic()">Tap to Play Music 🎶</div>
+
+  <script>
+    const heartC = document.getElementById('hearts');
+    for(let i=0;i<8;i++){
+      let sp = document.createElement('span');
+      sp.innerText = '💖';
+      sp.style.left = Math.random()*100 + 'vw';
+      sp.style.fontSize = (20+Math.random()*20) + 'px';
+      sp.style.animationDelay = (Math.random()*6) + 's';
+      heartC.appendChild(sp);
+    }
+
+    function showMessage(type) {
+      document.getElementById('sorryMessage').style.display = 'none';
+      document.getElementById('loveMessage').style.display = 'none';
+      if(type==='sorry') document.getElementById('sorryMessage').style.display='block';
+      else document.getElementById('loveMessage').style.display='block';
+    }
+
+    function dropFlowers() {
+      const fl = document.getElementById('flowers');
+      for(let i=0;i<15;i++){
+        let f = document.createElement('span');
+        f.innerText = '🌸';
+        f.style.left = Math.random()*100 + 'vw';
+        f.style.fontSize = (18+Math.random()*18) + 'px';
+        f.style.animationDuration = (6+Math.random()*4)+'s';
+        fl.appendChild(f);
+        setTimeout(() => f.remove(), 8000);
+      }
+    }
+
+    function playMusic(){
+      const m = document.getElementById('bgMusic');
+      m.play(); document.getElementById('playAudio').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
